@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROD DAYZ | Portfolio</title>
+    
+    <!-- High-End Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* Benjamin Creative Vibe: Variables */
+        :root {
+            --bg: #050505;
+            --text-main: #EAEAEA;
+            --text-dim: #888888;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --accent: #FFFFFF;
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav Header */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3vw;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links button {
+            background: none; border: none;
+            color: var(--text-dim);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .nav-links button:hover, .nav-links button.active {
+            color: var(--text-main);
+        }
+
+        /* Layout Container */
+        main {
+            padding: 8rem 3vw 4rem;
+            min-height: 100vh;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* -------------------------------------
+           TAB 01: OVERVIEW 
+        -------------------------------------- */
+        .hero-title {
+            font-size: clamp(4rem, 10vw, 10rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+        .hero-meta {
+            font-family: var(--font-mono);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 4rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            width: 100vw;
+            margin-left: -3vw;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            overflow: hidden;
+            padding: 1rem 0;
+            margin-bottom: 4rem;
+        }
+        .marquee {
+            white-space: nowrap;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            text-transform: uppercase;
+            animation: scroll-left 25s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Grid System (Editorial Style) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+            border-top: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+        }
+        .info-cell {
+            padding: 2.5rem;
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .info-cell h3 {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        .info-cell p, .info-cell ul { font-size: 1.2rem; line-height: 1.6; }
+        .info-cell ul { list-style: none; }
+        .info-cell li { margin-bottom: 0.5rem; }
+
+        /* -------------------------------------
+           TAB 02: SOFTWARE (Live Frames)
+        -------------------------------------- */
+        .section-header {
+            font-family: var(--font-mono);
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+        }
+        
+        .software-grid {
+            display:inline-flex;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        /* CSS Mac-style Device Frame */
+        .device-frame {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #111;
+        }
+        .device-topbar {
+            background: #1A1A1A;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.r { background: #FF5F56; }
+        .dot.y { background: #FFBD2E; }
+        .dot.g { background: #27C93F; }
+        .device-url {
+            margin-left: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        .iframe-container {
+            width: 100%;
+            height: 60vh;
+            min-height: 500px;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+        .device-caption {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* -------------------------------------
+           TAB 03 & 04: HORIZONTAL SCROLL
+        -------------------------------------- */
+        .category-block { margin-bottom: 5rem; }
+        
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding-bottom: 1.5rem;
+            /* Hide Scrollbar but keep functionality */
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        
+        .scroll-item {
+            flex: 0 0 380px; /* Fixed width for cards */
+            scroll-snap-align: start;
+        }
+        
+        .embed-card {
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+        }
+        
+        /* Responsive Embeds */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+        }
+        
+        .spotify-placeholder {
+            height: 152px;
+            background: #111;
+            border: 1px dashed var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo">PORTFOLIO</div>
+        <nav class="nav-links">
+            <button class="active" onclick="switchTab('overview', this)">(01) Overview</button>
+            <button onclick="switchTab('software', this)">(02) Software</button>
+            <button onclick="switchTab('beats', this)">(03) Beats</button>
+            <button onclick="switchTab('edits', this)">(04) Edits</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 01: OVERVIEW -->
+        <div id="overview" class="tab-content active">
+            <h1 class="hero-title">ATANG<br>MUTEMA</h1>
+            <div class="hero-meta">
+                <span>/ ENGINEROR</span>
+                <span>/ PRODUCOR</span>
+                <span>/ Creative</span>
+            </div>
+
+            <!-- CSS Marquee -->
+            <div class="marquee-container">
+                <div class="marquee">
+                    SOFTWARE DEVELOPMENT * BEAT PRODUCTION * AI AGENT ARCHITECTURE * DAVINCI RESOLVE COLOR GRADING * KOTLIN MOBILE APPS * 21 SAVAGE TYPE BEATS * SOFTWARE DEVELOPMENT * BEAT PRODUCTION * AI AGENT ARCHITECTURE * DAVINCI RESOLVE COLOR GRADING *
+                </div>
+            </div>
+
+            <!-- Data Grid -->
+            <div class="info-grid">
+                <div class="info-cell">
+                    <h3>( ABOUT )</h3>
+                    <p>Blending logic and audio. Expanding foundations in software architecture, systems engineering, and modern music production.</p>
+                </div>
+                <div class="info-cell">
+                    <h3>( EDUCATION )</h3>
+                    <ul>
+                        <li><strong>BAC</strong> - Technology Student</li>
+                        <li><strong>LinkedIn</strong> - Certifications in pipeline</li>
+                    </ul>
+                </div>
+                <div class="info-cell">
+                    <h3>( VENTURES & BRAND )</h3>
+                    <ul>
+                        <li><strong>Dumb</strong> - Indie Software Dev</li>
+                        <li><strong>Prod Dayz</strong> - Audio & Beat Distribution</li>
+                        <li><strong>DaysDevices</strong> - Tech Retail Operations</li>
+                    </ul>
+                </div>
+                <div class="info-cell">
+                    <h3>( STACK & GEAR )</h3>
+                    <p>Python (Llama/MCP/Groq), Kotlin, HTML/CSS. <br>Ubuntu Server / Nextcloud.<br>DXN PRO Y71s Audio Monitoring.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 02: SOFTWARE -->
+        <div id="software" class="tab-content">
+                <div class="info-grid">
+                    <div class="info-cell">
+                        <h3>( Software )</h3>
+                        <p>Blending logic and audio. Expanding foundations in software architecture, systems engineering, and modern music production.</p>
+                    </div>
+                </div>
+            <div class="section-header" style="margin-top: 6rem;">( LIVE WEBSITE DEPLOYMENTS )</div>
+            <div class="software-grid">
+                
+                <!-- Project 1 -->
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">huggingface.co/spaces/prod-dayz-ai</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with actual AI App URL -->
+                            <iframe src="https://atty3333.github.io/quickinvoice/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>QuickInvoice</strong> — A simple invoice generator built with Python and Flask.</div>
+                </div>
+
+                <!-- Project 2 -->
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">localhost:8080/nextcloud</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with Nextcloud URL or a looping MP4 video fallback -->
+                            <iframe src="https://atty3333.github.io/Chat-Personal-Ai-assistant-agent/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>AI Chat Agent Assistant</strong> — A  AI Agent assistant built with Python and Flask.</div>
+                </div>
+
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">localhost:8080/nextcloud</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with Nextcloud URL or a looping MP4 video fallback -->
+                            <iframe src="https://atty3333.github.io/Gaming-Hub/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>Gaming Hub</strong> — A centralized platform for managing and playing games.</div>
+                </div>
+
+            </div>
+
+            <div class="section-header" style="margin-top: 6rem;">( LIVE Software DEPLOYMENTS )</div>
+            <div class="software-grid" >
+                
+                <!-- Project 1 -->
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">huggingface.co/spaces/prod-dayz-ai</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with actual AI App URL -->
+                            <iframe src="https://atty3333.github.io/quickinvoice/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>QuickInvoice</strong> — A simple invoice generator built with Python and Flask.</div>
+                </div>
+
+                <!-- Project 2 -->
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">localhost:8080/nextcloud</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with Nextcloud URL or a looping MP4 video fallback -->
+                            <iframe src="https://atty3333.github.io/Chat-Personal-Ai-assistant-agent/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>AI Chat Agent Assistant</strong> — A  AI Agent assistant built with Python and Flask.</div>
+                </div>
+
+                <div>
+                    <div class="device-frame">
+                        <div class="device-topbar">
+                            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                            <div class="device-url">localhost:8080/nextcloud</div>
+                        </div>
+                        <div class="iframe-container">
+                            <!-- Replace with Nextcloud URL or a looping MP4 video fallback -->
+                            <iframe src="https://atty3333.github.io/Gaming-Hub/" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="device-caption"><strong>Gaming Hub</strong> — A centralized platform for managing and playing games.</div>
+                </div>
+
+            </div>            
+                
+
+
+
+           
+        </div>        
+
+        <!-- 03: BEATS -->
+        <div id="beats" class="tab-content">
+                <div class="info-grid">
+                    <div class="info-cell">
+                        <h3>( Beats )</h3>
+                        <p>Blending logic and audio. Expanding foundations in software architecture, systems engineering, and modern music production.</p>
+                    </div>
+                </div>
+            <div class="category-block">
+                <div class="section-header">( POPULAR DROPS )</div>
+                <div class="horizontal-scroll">
+                    
+                    <!-- Card 1: BeatStars -->
+                    <div class="scroll-item embed-card">
+                        <!-- Replace src with BeatStars Blaze URL -->
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">21 Savage Type Beat - "Venom"</p>
+                    </div>
+
+                    
+                    <!-- Card 3: Example filler to show scrolling -->
+                    <div class="scroll-item embed-card">
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">Dark Trap Instrumental</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="section-header">( New Uploads )</div>
+                <div class="horizontal-scroll">
+                    
+                    <!-- Card 1: BeatStars -->
+                    <div class="scroll-item embed-card">
+                        <!-- Replace src with BeatStars Blaze URL -->
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">21 Savage Type Beat - "Venom"</p>
+                    </div>
+
+
+                    
+                    <!-- Card 3: Example filler to show scrolling -->
+                    <div class="scroll-item embed-card">
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">Dark Trap Instrumental</p>
+                    </div>
+
+                </div>
+            </div>  
+            
+            <div class="category-block">
+                <div class="section-header">( Prod By Me )</div>
+                <div class="horizontal-scroll">
+                    
+                    <!-- Card 1: BeatStars -->
+                    <div class="scroll-item embed-card">
+                        <!-- Replace src with BeatStars Blaze URL -->
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">21 Savage Type Beat - "Venom"</p>
+                    </div>
+
+                    
+                    <!-- Card 3: Example filler to show scrolling -->
+                    <div class="scroll-item embed-card">
+                        <iframe src="https://player.beatstars.com/?storeId=YOUR_ID" width="100%" height="300" style="border:none;"></iframe>
+                        <p style="margin-top: 1rem;">Dark Trap Instrumental</p>
+                    </div>
+
+                </div>
+            </div>               
+            <div class="category-block">
+                <div class="section-header">( PLACEMENT )</div>
+                <div class="horizontal-scroll">
+                    
+
+                    <!-- Card 2: Spotify (Designed Placeholder) -->
+                    <div class="scroll-item embed-card">
+                        <div class="spotify-placeholder">
+                            [ SPOTIFY IFRAME PLACEMENT ]
+                        </div>
+                        <p style="margin-top: 1rem;">Young Peterson - "Zero Degrees" (Prod. by Dayz)</p>
+                    </div>
+                    
+
+
+                </div>
+            </div>                
+        </div>
+
+        <!-- 04: EDITS -->
+        <div id="edits" class="tab-content">
+                    <div class="scroll-item embed-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with YT Embed -->
+                            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.9rem;">Compound Clip Management Test</p>
+                    </div>
+                                    
+                    <div class="info-cell">
+                        <h3>( Software )</h3>
+                        <p>Blending logic and audio. Expanding foundations in software architecture, systems engineering, and modern music production.</p>
+                    </div>
+                
+            <div class="category-block">
+                <div class="section-header">( My EDITS )</div>
+                <div class="horizontal-scroll">
+                    
+                    <!-- YT Edit 1 -->
+                    <div class="scroll-item embed-card">
+                        <div class="video-wrapper">
+                            <!-- Replace with YT Embed -->
+                            <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.9rem;">Compound Clip Management Test</p>
+                    </div>
+
+                    <!-- YT Edit 2 -->
+                    <div class="scroll-item embed-card">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                        <p style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.9rem;">Beat Visualizer 02</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        // Tab Navigation Logic
+        function switchTab(tabId, btn) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Reset button states
+            document.querySelectorAll('.nav-links button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Activate chosen tab and button
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+            
+            // Scroll to top instantly for a fresh view
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
